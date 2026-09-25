@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "surveyResponse": {
+      "title": "Survey Response",
+      "description": "A citizen's satisfaction survey response.",
+      "type": "object",
+      "properties": {
+        "surveyId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "serviceType": { 
+          "type": "string", 
+          "enum": ["Hộ tịch", "Chứng thực", "Đất đai", "Xây dựng", "Chính sách xã hội", "Khác"] 
+        },
+        "submissionMethod": { 
+          "type": "string", 
+          "enum": ["Trực tiếp", "Trực tuyến", "Kết hợp"] 
+        },
+        "ratings": {
+          "type": "object",
+          "properties": {
+            "informationAccess": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "procedureGuidance": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "staffAttitude": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "convenience": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "processingTimeClarity": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "overallSatisfaction": { "type": "integer", "minimum": 1, "maximum": 5 }
+          },
+          "required": ["informationAccess", "procedureGuidance", "staffAttitude", "convenience", "processingTimeClarity", "overallSatisfaction"]
+        },
+        "improvementArea": { 
+          "type": "string", 
+          "enum": ["Thời gian giải quyết", "Hướng dẫn thủ tục", "Thái độ phục vụ", "Cơ sở vật chất", "Dịch vụ trực tuyến", "Khác"]
+        },
+        "comment": { "type": "string", "maxLength": 1000, "nullable": true },
+        "dataVersion": { "type": "integer" }
+      },
+      "required": ["surveyId", "createdAt", "serviceType", "submissionMethod", "ratings", "improvementArea", "dataVersion"]
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "An administrative user.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/surveyResponses/{surveyId}": {
+      "schema": "surveyResponse",
+      "description": "Collection of all survey responses."
+    },
+    "/admins/{uid}": {
+      "schema": "admin",
+      "description": "Collection of authorized admin UIDs."
+    }
+  }
+}

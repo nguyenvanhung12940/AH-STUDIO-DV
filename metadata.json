@@ -1,0 +1,6 @@
+{
+  "name": "Khảo sát sự hài lòng - UBND Xã Trà Liên",
+  "description": "Hệ thống khảo sát mức độ hài lòng của người dân tại Bộ phận Tiếp nhận và Trả kết quả UBND Xã Trà Liên.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
